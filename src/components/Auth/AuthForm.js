@@ -26,7 +26,7 @@ const AuthForm = () => {
         
         if(res.ok){
             return res.json().then(data => {
-                console.log('User has successfullt signed in')
+                console.log('User has successfullt signed up')
             }) 
             
         } else{
