@@ -1,10 +1,12 @@
 import { useRef, useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import AuthContext from '../store/auth-context';
 import classes from './ProfileForm.module.css';
 const ProfileForm = () => {
   const nameInputRef = useRef();
   const urlInputRef = useRef();
   const authCtx = useContext(AuthContext);
+  const history = useHistory();
 
   const [defaultName, setDefaultName] = useState("");
   const [defaultUrl, setDefaultUrl] = useState("");
@@ -64,6 +66,10 @@ const ProfileForm = () => {
           Your Profile is <b>64%</b> completed. A completed Profile has higher
           chances of landing a job.
           <button>Complete Now</button>
+          <button onClick={() => {
+            authCtx.logout();
+            history.replace('/')
+          }}>Log out</button>
         </div>
       </header>
       <form className={classes.form} onSubmit={submitHandler}>

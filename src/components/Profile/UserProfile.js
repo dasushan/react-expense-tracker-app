@@ -42,6 +42,10 @@ const UserProfile = () => {
           >
             Complete Now
           </button>
+          <button onClick={() => {
+            authCtx.logout();
+            history.replace('/')
+          }}>Log out</button>
         </div>
       </div>
 
