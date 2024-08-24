@@ -49,8 +49,25 @@ label {
   padding: 0.5rem 2.5rem;
   
 }
+.actions p {
+    font: inherit;
+    font-size: 0.9rem;
+    color: blue;
+    text-decoration: underline;
+}
 
 .actions button:hover {
   background-color: #873abb;
   border-color: #873abb;
+}
+
+.footer{
+    color: slategrey;
+    font-weight: 300;
+    padding: 1rem;
+    text-align: center;
+    margin-top: 1rem;
+    border: 1px solid;
+    border-radius: 5px;
+    cursor: pointer;
 }
