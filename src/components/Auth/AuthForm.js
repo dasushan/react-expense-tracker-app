@@ -96,7 +96,9 @@ const AuthForm = () => {
         )}
         <div className={classes.actions}>
           <button>{isLogin ? 'Login' : 'Sign up'}</button>
-          {isLogin && <p>Forgot Password</p>}
+          {isLogin && <p onClick={() => {
+            history.replace('/reset')
+          }}>Forgot Password</p>}
         </div>
       </form>
       <div className={classes.footer} onClick={switchAuthModuleHandler}>

@@ -4,6 +4,7 @@ import AuthPage from './components/pages/AuthPage';
 import Profile from './components/pages/Profile';
 import AuthContext from './components/store/auth-context';
 import { useContext } from 'react';
+import Reset from './components/pages/Reset';
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -22,6 +23,8 @@ function App() {
           {authCtx.isLoggedIn && <Profile />}
           {!authCtx.isLoggedIn && <Redirect to="/" />}
         </Route>
+        <Route path='/reset'>
+        <Reset /></Route>
       </Switch>
     </div>
   );
