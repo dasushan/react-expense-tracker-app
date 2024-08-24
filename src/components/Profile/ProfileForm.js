@@ -1,4 +1,4 @@
-import { useRef, useContext} from 'react';
+import { useRef, useContext, useEffect, useState } from 'react';
 import AuthContext from '../store/auth-context';
 import classes from './ProfileForm.module.css';
 const ProfileForm = () => {
@@ -6,29 +6,54 @@ const ProfileForm = () => {
   const urlInputRef = useRef();
   const authCtx = useContext(AuthContext);
 
+  const [defaultName, setDefaultName] = useState("");
+  const [defaultUrl, setDefaultUrl] = useState("");
+
+  useEffect(() => {
+    fetch(
+      'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyBKniczVLNJrXICnBbwj2W29ttGPgAtKCY',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          idToken: authCtx.token,
+        }),
+      }
+    ).then(async (response) => {
+      const result = await response.json();
+      const data = result.users[0]
+      console.log(result.users[0])
+      setDefaultName(data.displayName);
+      setDefaultUrl(data.photoUrl);
+    });
+  }, []);
   const submitHandler = (event) => {
     event.preventDefault();
 
     const enteredName = nameInputRef.current.value;
     const enteredUrl = urlInputRef.current.value;
-    console.log(authCtx.token)
-    fetch('https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyBKniczVLNJrXICnBbwj2W29ttGPgAtKCY', {
+    console.log(authCtx.token);
+    fetch(
+      'https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyBKniczVLNJrXICnBbwj2W29ttGPgAtKCY',
+      {
         method: 'POST',
         headers: {
-            'Content-Type' : 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            idToken: authCtx.token,
-            displayName: enteredName,
-            photoUrl: enteredUrl,
-            returnSecureToken: false
-        })
-    }).then( async (response) => {
-        const result = await response.json();
-        console.log(result)
-    })
-
-  }
+          idToken: authCtx.token,
+          displayName: enteredName,
+          photoUrl: enteredUrl,
+          returnSecureToken: false,
+        }),
+      }
+    ).then(async (response) => {
+      const result = await response.json();
+      console.log(result);
+    });
+  };
   return (
     <section>
       <header className={classes.header}>
@@ -49,15 +74,15 @@ const ProfileForm = () => {
         <section className={classes.formbody}>
           <div>
             <label htmlFor="name">Full Name</label>
-            <input type="text" id="name" required ref={nameInputRef}/>
+            <input type="text" id="name" required ref={nameInputRef} defaultValue={defaultName}/>
           </div>
           <div>
             <label htmlFor="url">Profile Photo URL</label>
-            <input type="url" id="url" required ref={urlInputRef}/>
+            <input type="url" id="url" required ref={urlInputRef} defaultValue={defaultUrl}/>
           </div>
         </section>
 
-        <button type='submit'>Update</button>
+        <button type="submit">Update</button>
       </form>
     </section>
   );
