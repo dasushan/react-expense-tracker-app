@@ -23,3 +23,21 @@
     background-color: azure;
     cursor: pointer;
 }
+
+.verify{
+    
+    width: 90%;
+    max-width: 25rem;
+    margin: 5rem auto;
+}
+
+.verify button{
+    display: block;
+    width: 20rem;
+    padding: 1rem 2rem;
+    background-color: white;
+    border: 2px solid red;
+    color: red;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
