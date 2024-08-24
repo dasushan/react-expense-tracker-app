@@ -8,8 +8,8 @@ const ProfileForm = () => {
   const authCtx = useContext(AuthContext);
   const history = useHistory();
 
-  const [defaultName, setDefaultName] = useState("");
-  const [defaultUrl, setDefaultUrl] = useState("");
+  const [defaultName, setDefaultName] = useState('');
+  const [defaultUrl, setDefaultUrl] = useState('');
 
   useEffect(() => {
     fetch(
@@ -25,8 +25,8 @@ const ProfileForm = () => {
       }
     ).then(async (response) => {
       const result = await response.json();
-      const data = result.users[0]
-      console.log(result.users[0])
+      const data = result.users[0];
+      console.log(result.users[0]);
       setDefaultName(data.displayName);
       setDefaultUrl(data.photoUrl);
     });
@@ -66,10 +66,14 @@ const ProfileForm = () => {
           Your Profile is <b>64%</b> completed. A completed Profile has higher
           chances of landing a job.
           <button>Complete Now</button>
-          <button onClick={() => {
-            authCtx.logout();
-            history.replace('/')
-          }}>Log out</button>
+          <button
+            onClick={() => {
+              authCtx.logout();
+              history.replace('/');
+            }}
+          >
+            Log out
+          </button>
         </div>
       </header>
       <form className={classes.form} onSubmit={submitHandler}>
@@ -80,11 +84,23 @@ const ProfileForm = () => {
         <section className={classes.formbody}>
           <div>
             <label htmlFor="name">Full Name</label>
-            <input type="text" id="name" required ref={nameInputRef} defaultValue={defaultName}/>
+            <input
+              type="text"
+              id="name"
+              required
+              ref={nameInputRef}
+              defaultValue={defaultName}
+            />
           </div>
           <div>
             <label htmlFor="url">Profile Photo URL</label>
-            <input type="url" id="url" required ref={urlInputRef} defaultValue={defaultUrl}/>
+            <input
+              type="url"
+              id="url"
+              required
+              ref={urlInputRef}
+              defaultValue={defaultUrl}
+            />
           </div>
         </section>
 
