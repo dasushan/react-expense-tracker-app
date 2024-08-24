@@ -1,14 +1,16 @@
 import classes from './AuthForm.module.css';
-import { useRef, useState } from 'react';
-import {useHistory} from 'react-router-dom'
+import { useRef, useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import AuthContext from '../store/auth-context';
 
 const AuthForm = () => {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const confirmpasswordInputRef = useRef();
+  const history = useHistory();
+  const authCtx = useContext(AuthContext);
 
   const [isLogin, setIslogin] = useState(true);
-  const history = useHistory();
 
   const switchAuthModuleHandler = () => {
     setIslogin((prevState) => !prevState);
@@ -41,13 +43,16 @@ const AuthForm = () => {
       if (res.ok) {
         if (!isLogin) {
           return res.json().then((data) => {
+            history.replace('/welcome');
+            authCtx.login(data.idToken)
             console.log('User has successfullt signed up');
           });
-        }else{
-            return res.json().then((data) => {
-                history.replace('/welcome')
-                console.log('login')
-            })
+        } else {
+          return res.json().then((data) => {
+            history.replace('/welcome');
+            authCtx.login(data.idToken)
+            console.log('login');
+          });
         }
       } else {
         return res.json().then((data) => {

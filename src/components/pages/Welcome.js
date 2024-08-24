@@ -1,6 +1,8 @@
+import UserProfile from "../Profile/UserProfile"
+
 const Welcome = () => {
     return (
-        <p>Welcome to expense tracker</p>
+        <UserProfile />
     )
 }
 

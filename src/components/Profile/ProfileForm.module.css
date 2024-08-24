@@ -1,0 +1,61 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-style: italic;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    
+    border-bottom: 1px solid;
+    color: black;
+}
+
+.main{
+    width: 100%;
+    max-width: 60rem;
+    padding: 1rem;
+}
+.actions{
+    background-color:rgb(221, 189, 243);
+    padding: 0 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.8rem;
+    
+}
+.actions button {
+    border: none;
+    font: inherit;
+    background-color:rgb(221, 189, 243) ;
+    color:blue;
+    cursor: pointer;
+}
+
+.form{
+    width: 90%;
+    max-width: 40rem;
+    margin: 0 auto;
+}
+
+.title{
+    display: flex;
+    justify-content: space-between;
+}
+
+.title header{
+    font-size: 1.3rem;
+    font-weight:500
+}
+.title button{
+    color: red;
+    border: 1px solid red;
+    background-color: white;
+    border-radius: 2px;
+    font-weight: 600;
+}
+
+.formbody{
+    margin: 2rem 0;
+    display: flex;
+    justify-content: space-around;
+
+}

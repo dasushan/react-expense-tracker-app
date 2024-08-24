@@ -1,0 +1,25 @@
+.profile{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid;
+    margin: 0 1rem;
+    font-style: italic;
+    align-items: center;
+}
+
+.actions{
+    display: flex;
+    
+    background-color:azure;
+    
+    padding: 0 1rem;
+    border-radius: 1rem; 
+}
+
+.actions button{
+    border: none;
+    color:blue;
+    font:inherit;
+    background-color: azure;
+    cursor: pointer;
+}
