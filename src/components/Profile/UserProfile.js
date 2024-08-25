@@ -2,6 +2,8 @@ import classes from './UserProfile.module.css';
 import {useContext} from 'react';
 import AuthContext from '../store/auth-context';
 import { useHistory } from 'react-router-dom';
+import NewExpense from '../NewExpense/NewExpense';
+import Expenses from '../Expenses/Expenses';
 
 const UserProfile = () => {
   const history = useHistory();
@@ -52,6 +54,9 @@ const UserProfile = () => {
       <div className={classes.verify}>
         <button onClick={verifyEmailHandler}>Verify Email Id</button>
       </div>
+
+      <NewExpense />
+      <Expenses />
     </>
   );
 };
