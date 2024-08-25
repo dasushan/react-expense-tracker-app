@@ -1,13 +1,13 @@
 import classes from './UserProfile.module.css';
-import {useContext} from 'react';
+import { useContext } from 'react';
 import AuthContext from '../store/auth-context';
 import { useHistory } from 'react-router-dom';
-import NewExpense from '../NewExpense/NewExpense';
-import ExpensesList from '../Expenses/ExpensesList';
+
+import Expenses from '../Expenses/Expenses';
 
 const UserProfile = () => {
   const history = useHistory();
-  const authCtx = useContext(AuthContext)
+  const authCtx = useContext(AuthContext);
 
   const verifyEmailHandler = () => {
     fetch(
@@ -18,18 +18,17 @@ const UserProfile = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            requestType: "VERIFY_EMAIL",
-            idToken: authCtx.token
+          requestType: 'VERIFY_EMAIL',
+          idToken: authCtx.token,
         }),
       }
     ).then(async (response) => {
-        try{
-            const result = await response.json();
-        }
-        catch(error){
-            console.log(error)
-        }
-    })
+      try {
+        const result = await response.json();
+      } catch (error) {
+        console.log(error);
+      }
+    });
   };
   return (
     <>
@@ -44,10 +43,14 @@ const UserProfile = () => {
           >
             Complete Now
           </button>
-          <button onClick={() => {
-            authCtx.logout();
-            history.replace('/')
-          }}>Log out</button>
+          <button
+            onClick={() => {
+              authCtx.logout();
+              history.replace('/');
+            }}
+          >
+            Log out
+          </button>
         </div>
       </div>
 
@@ -55,8 +58,7 @@ const UserProfile = () => {
         <button onClick={verifyEmailHandler}>Verify Email Id</button>
       </div>
 
-      <NewExpense />
-      <ExpensesList />
+      <Expenses />
     </>
   );
 };
