@@ -1,6 +1,8 @@
 import classes from './NewExpense.module.css';
 import { useRef, useContext } from 'react';
+import {v4 as uuidv4} from 'uuid'
 import ExpenseContext from '../store/expense-context';
+
 const NewExpense = () => {
   const amountInputRef = useRef();
   const descriptionInputRef = useRef();
@@ -17,7 +19,8 @@ const NewExpense = () => {
     const expenseData ={
         amount: enteredAmount,
         description: enteredDescription,
-        category: enteredCategory
+        category: enteredCategory,
+        id: uuidv4()
     }
     expenseCtx.addExpense(expenseData);
   };

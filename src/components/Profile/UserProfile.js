@@ -3,7 +3,7 @@ import {useContext} from 'react';
 import AuthContext from '../store/auth-context';
 import { useHistory } from 'react-router-dom';
 import NewExpense from '../NewExpense/NewExpense';
-import Expenses from '../Expenses/Expenses';
+import ExpensesList from '../Expenses/ExpensesList';
 
 const UserProfile = () => {
   const history = useHistory();
@@ -56,7 +56,7 @@ const UserProfile = () => {
       </div>
 
       <NewExpense />
-      <Expenses />
+      <ExpensesList />
     </>
   );
 };
