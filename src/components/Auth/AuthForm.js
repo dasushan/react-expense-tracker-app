@@ -1,23 +1,29 @@
 import classes from './AuthForm.module.css';
-import { useRef, useState, useContext } from 'react';
+import { useRef, useState} from 'react';
 import { useHistory } from 'react-router-dom';
-import AuthContext from '../store/auth-context';
+// import AuthContext from '../store/auth-context';
+
+import { useSelector, useDispatch } from 'react-redux';
+import { login } from '../store/authSlice';
 
 const AuthForm = () => {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const confirmpasswordInputRef = useRef();
+
   const history = useHistory();
-  const authCtx = useContext(AuthContext);
+  //const authCtx = useContext(AuthContext);
+
+  const dispatch = useDispatch();
 
   const [isLogin, setIslogin] = useState(true);
 
   const switchAuthModuleHandler = () => {
     setIslogin((prevState) => !prevState);
   };
+
   const submitHandler = (event) => {
     event.preventDefault();
-
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
 
@@ -44,13 +50,19 @@ const AuthForm = () => {
         if (!isLogin) {
           return res.json().then((data) => {
             history.replace('/welcome');
-            authCtx.login(data.idToken)
-            console.log('User has successfullt signed up');
+            // authCtx.login(data.idToken)
+
+            dispatch(login(data.idToken))
+
+            console.log('User has successfully signed up');
           });
         } else {
           return res.json().then((data) => {
             history.replace('/welcome');
-            authCtx.login(data.idToken)
+            // authCtx.login(data.idToken)
+
+            dispatch(login(data.idToken))
+
             console.log('login');
           });
         }

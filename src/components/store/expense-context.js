@@ -36,6 +36,7 @@ export const ExpenseContextProvider = (props) => {
       setExpenses(resArr);
     });
   }, []);
+  
   const addExpenseHandler = (expense) => {
     fetch(
       'https://react-backend-app-f330f-default-rtdb.asia-southeast1.firebasedatabase.app/expenses.json',

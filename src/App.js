@@ -6,22 +6,26 @@ import AuthContext from './components/store/auth-context';
 import { useContext } from 'react';
 import Reset from './components/pages/Reset';
 
-function App() {
-  const authCtx = useContext(AuthContext);
+import { useSelector } from 'react-redux';
+import { getLogInStatus } from './components/store/authSlice';
 
+function App() {
+  // const authCtx = useContext(AuthContext);
+  const loggedin = useSelector(getLogInStatus)
+  console.log(loggedin)
   return (
     <div className="App">
       <Switch>
-        {!authCtx.isLoggedIn && <Route path="/" exact>
+        {!loggedin && <Route path="/" exact>
           <AuthPage />
         </Route>}
         <Route path="/welcome">
-          {authCtx.isLoggedIn && <Welcome />}
-          {!authCtx.isLoggedIn && <Redirect to="/" />}
+          {loggedin && <Welcome />}
+          {!loggedin && <Redirect to="/" />}
         </Route>
         <Route path="/profile">
-          {authCtx.isLoggedIn && <Profile />}
-          {!authCtx.isLoggedIn && <Redirect to="/" />}
+          {loggedin && <Profile />}
+          {!loggedin && <Redirect to="/" />}
         </Route>
         <Route path='/reset'>
         <Reset /></Route>

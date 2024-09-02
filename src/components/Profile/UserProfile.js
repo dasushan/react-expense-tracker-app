@@ -1,13 +1,20 @@
 import classes from './UserProfile.module.css';
-import { useContext } from 'react';
-import AuthContext from '../store/auth-context';
+
 import { useHistory } from 'react-router-dom';
 
 import Expenses from '../Expenses/Expenses';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { logout, getAuthToken } from '../store/authSlice';
+
+
 const UserProfile = () => {
   const history = useHistory();
-  const authCtx = useContext(AuthContext);
+  
+
+  const dispatch = useDispatch();
+  const token = useSelector(getAuthToken)
+  console.log(token);
 
   const verifyEmailHandler = () => {
     fetch(
@@ -19,7 +26,7 @@ const UserProfile = () => {
         },
         body: JSON.stringify({
           requestType: 'VERIFY_EMAIL',
-          idToken: authCtx.token,
+          idToken: token,
         }),
       }
     ).then(async (response) => {
@@ -45,7 +52,7 @@ const UserProfile = () => {
           </button>
           <button
             onClick={() => {
-              authCtx.logout();
+              dispatch(logout())
               history.replace('/');
             }}
           >
