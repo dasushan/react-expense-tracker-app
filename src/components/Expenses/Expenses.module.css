@@ -1,0 +1,17 @@
+.action{
+    width: 25rem;
+    text-align: center;
+    margin: 2rem auto;
+    background-color: rgb(236, 243, 59);
+    padding: 1rem;
+    border-radius: 6px;
+    border: solid 2px #D8D710;
+}
+
+.action button{
+    border: none;
+    font-size: larger;
+    font-weight: 600;
+    background-color:rgb(236, 243, 59) ;
+    color: #C70039;
+}

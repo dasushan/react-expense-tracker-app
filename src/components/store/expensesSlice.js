@@ -5,7 +5,8 @@ const EXPENSES_URL = 'https://react-backend-app-f330f-default-rtdb.asia-southeas
 const initialState = {
     expenses: [],
     status: 'idle', // 'idle' |  'loading'  |  'succeeded' | 'failed'
-    error: null
+    error: null,
+    totalAmount: 0
 };
 
 export const  fetchExpenses = createAsyncThunk('/expenses/fetchExpenses', async () => {
@@ -56,7 +57,12 @@ const expensesSlice = createSlice({
         })
         .addCase(fetchExpenses.fulfilled, (state, action) => {
             state.status = 'succeeded'
-
+            const expenses = action.payload;
+            let amount = 0;
+            expenses.forEach((expense) => {
+                amount = amount + expense.amount;
+            })
+            state.totalAmount = amount;
             // Add fetched expenses to the array
             state.expenses = state.expenses.concat(action.payload)
         })
@@ -65,6 +71,7 @@ const expensesSlice = createSlice({
             state.error = action.error.message
         })
         .addCase(addNewExpense.fulfilled, (state, action) => {
+            state.totalAmount = state.totalAmount + action.payload.amount
             state.expenses.push(action.payload)
         })
     }
@@ -73,5 +80,6 @@ const expensesSlice = createSlice({
 export const selectAllExpenses = (state) => state.expenses.expenses;
 export const getExpensesStatus = (state) => state.expenses.status;
 export const getExpensesError = (state) => state.expenses.error;
+export const getExpensesAmount = (state) => state.expenses.totalAmount;
 
 export default expensesSlice.reducer
