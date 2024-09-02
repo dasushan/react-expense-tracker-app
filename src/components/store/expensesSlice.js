@@ -60,7 +60,7 @@ const expensesSlice = createSlice({
             const expenses = action.payload;
             let amount = 0;
             expenses.forEach((expense) => {
-                amount = amount + expense.amount;
+                amount = amount + Number(expense.amount);
             })
             state.totalAmount = amount;
             // Add fetched expenses to the array
@@ -71,7 +71,7 @@ const expensesSlice = createSlice({
             state.error = action.error.message
         })
         .addCase(addNewExpense.fulfilled, (state, action) => {
-            state.totalAmount = state.totalAmount + action.payload.amount
+            state.totalAmount = state.totalAmount + Number(action.payload.amount)
             state.expenses.push(action.payload)
         })
     }
