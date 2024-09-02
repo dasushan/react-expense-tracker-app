@@ -1,14 +1,17 @@
 import classes from './NewExpense.module.css';
-import { useRef, useContext } from 'react';
+import { useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import ExpenseContext from '../store/expense-context';
+//import ExpenseContext from '../store/expense-context';
+import { useDispatch } from 'react-redux';
+import { addNewExpense } from '../store/expensesSlice';
 
 const NewExpense = () => {
   const amountInputRef = useRef();
   const descriptionInputRef = useRef();
   const categoryInputRef = useRef();
-  const expenseCtx = useContext(ExpenseContext);
-  console.log(expenseCtx.newCategory);
+  // const expenseCtx = useContext(ExpenseContext);
+  // console.log(expenseCtx.newCategory);
+  const dispatch= useDispatch();
   
   const submitHandler = (event) => {
     event.preventDefault();
@@ -24,7 +27,8 @@ const NewExpense = () => {
       category: enteredCategory,
       id: uuidv4(),
     };
-    expenseCtx.addExpense(expenseData);
+    //expenseCtx.addExpense(expenseData);
+    dispatch(addNewExpense(expenseData))
   };
   return (
     <div className={classes.newexpense}>
@@ -40,7 +44,7 @@ const NewExpense = () => {
               id="amount"
               required
               ref={amountInputRef}
-             defaultValue={expenseCtx.newAmount}
+             
             />
           </div>
           <div className={classes.expensecontrol}>
@@ -50,7 +54,7 @@ const NewExpense = () => {
               id="description"
               required
               ref={descriptionInputRef}
-              defaultValue={expenseCtx.newDescription}
+              
             />
           </div>
           <div className={classes.expensecontrol}>
@@ -59,7 +63,7 @@ const NewExpense = () => {
               id="category"
               required
               ref={categoryInputRef}
-              defaultValue={expenseCtx.newCategory}
+              
             >
               <option value="Food">Food</option>
               <option value="Petrol">Petrol</option>

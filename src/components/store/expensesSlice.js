@@ -26,6 +26,22 @@ export const  fetchExpenses = createAsyncThunk('/expenses/fetchExpenses', async 
    }
 })
 
+export const addNewExpense = createAsyncThunk('/expenses/addNewExpense', async (initialExpense) => {
+    try{
+        const response = await fetch(EXPENSES_URL, {
+            method: 'POST',
+            body: JSON.stringify(initialExpense),
+            headers: {
+                'Content-Type' : 'application/json'
+            }
+        })
+        const result = await response.json();
+        return initialExpense
+    } catch(err){
+        return err.message
+    }
+})
+
 const expensesSlice = createSlice({
     name: 'expenses',
     initialState,
@@ -47,6 +63,9 @@ const expensesSlice = createSlice({
         .addCase(fetchExpenses.rejected, (state, action) => {
             state.status = 'failed'
             state.error = action.error.message
+        })
+        .addCase(addNewExpense.fulfilled, (state, action) => {
+            state.expenses.push(action.payload)
         })
     }
 })
