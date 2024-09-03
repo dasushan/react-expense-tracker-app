@@ -26,17 +26,21 @@
 
 .verify{
     
-    width: 90%;
-    max-width: 25rem;
-    margin: 5rem auto;
+    
+    width: 25rem;
+    padding: 1rem;
+    margin: 2rem auto;
+    background-color: white;
+    border: 2px solid red;
+    border-radius: 6px;
 }
 
 .verify button{
-    display: block;
-    width: 20rem;
+    
+   
     padding: 1rem 2rem;
     background-color: white;
-    border: 2px solid red;
+    border: none;
     color: red;
     font-size: 1.2rem;
     font-weight: 600;
