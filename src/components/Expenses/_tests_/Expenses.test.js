@@ -3,7 +3,7 @@ import Expenses from '../Expenses';
 import userEvent from '@testing-library/user-event';
 import { renderWithProviders } from '../../../utils-for-tests';
 import { act } from 'react';
-import { toBeInTheDocument } from '@testing-library/jest-dom/matchers';
+
 describe('Expenses component', () => {
   test(' renders Activate Premium as a button if totalAmount>10000', () => {
     //Arrange (render the component that we want to test)
