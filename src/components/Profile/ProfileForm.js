@@ -2,11 +2,17 @@ import { useRef, useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import AuthContext from '../store/auth-context';
 import classes from './ProfileForm.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../store/authSlice';
+import { getAuthToken } from '../store/authSlice';
 const ProfileForm = () => {
   const nameInputRef = useRef();
   const urlInputRef = useRef();
   const authCtx = useContext(AuthContext);
   const history = useHistory();
+
+  const token = useSelector(getAuthToken)
+  const dispatch = useDispatch();
 
   const [defaultName, setDefaultName] = useState('');
   const [defaultUrl, setDefaultUrl] = useState('');
@@ -20,7 +26,7 @@ const ProfileForm = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          idToken: authCtx.token,
+          idToken: token,
         }),
       }
     ).then(async (response) => {
@@ -68,7 +74,7 @@ const ProfileForm = () => {
           <button>Complete Now</button>
           <button
             onClick={() => {
-              authCtx.logout();
+              dispatch(logout())
               history.replace('/');
             }}
           >
